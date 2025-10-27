@@ -4,38 +4,17 @@
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
 import Link from "next/link";
-
-// Types
-import type { Route } from "next";
+import { Logo } from "./logo";
 import { ThemeToggle } from "./theme-toggle";
 
-interface Navigation {
-  label: string;
-  href: Route;
-}
-
-const navigation: Navigation[] = [
-  {
-    label: "Documentation",
-    href: "/docs" as Route,
-  },
-  {
-    label: "Hooks",
-    href: "/docs/hooks" as Route,
-  },
-  {
-    label: "Utilities",
-    href: "/docs/utilities" as Route,
-  },
-];
+// Types
+import { navigation } from "@/lib/navigation";
 
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="flex h-16 items-center justify-between">
-        <Link href="/" className="items-center gap-2 hidden md:flex">
-          <span className="font-bold text-lg">I7A Libs</span>
-        </Link>
+        <Logo />
         <nav className="flex items-center gap-6">
           {navigation.map((nav) => (
             <Link

@@ -1,4 +1,4 @@
-import { docs } from "@/lib/content";
+import { docsNavigation } from "@/lib/navigation";
 
 type NavItem = {
   title: string;
@@ -6,7 +6,9 @@ type NavItem = {
 };
 
 export function useDocsNavigation(currentPath: string) {
-  const allItems: NavItem[] = docs.flatMap((section) => section.items);
+  const allItems: NavItem[] = docsNavigation.flatMap(
+    (section) => section.items
+  );
   const currentIndex = allItems.findIndex((item) => item.href === currentPath);
 
   if (currentIndex === -1) {

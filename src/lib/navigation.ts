@@ -1,4 +1,37 @@
-export const docs = [
+import type { Route } from "next";
+
+interface Navigation {
+  label: string;
+  href: Route;
+}
+
+interface DocsNavItem {
+  title: string;
+  description: string;
+  href: string;
+}
+
+interface DocsNavigation {
+  title: string;
+  items: DocsNavItem[];
+}
+
+export const navigation: Navigation[] = [
+  {
+    label: "Documentation",
+    href: "/docs" as Route,
+  },
+  {
+    label: "Hooks",
+    href: "/docs/hooks" as Route,
+  },
+  {
+    label: "Utilities",
+    href: "/docs/utilities" as Route,
+  },
+];
+
+export const docsNavigation: DocsNavigation[] = [
   {
     title: "Getting Started",
     items: [

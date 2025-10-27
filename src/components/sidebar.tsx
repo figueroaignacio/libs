@@ -10,7 +10,7 @@ import Link from "next/link";
 
 // Utils
 import { cn } from "@/lib/cn";
-import { docs } from "@/lib/content";
+import { docsNavigation } from "@/lib/navigation";
 
 // Types
 import type { Route } from "next";
@@ -18,7 +18,7 @@ import type { Route } from "next";
 export function Sidebar() {
   const pathname = usePathname();
   const [openSections, setOpenSections] = useState<string[]>(
-    docs.map((section) => section.title)
+    docsNavigation.map((section) => section.title)
   );
 
   const toggleSection = (title: string) => {
@@ -30,7 +30,7 @@ export function Sidebar() {
   return (
     <aside className="hide-scrollbar sticky top-24 hidden h-[calc(100vh-5rem)] shrink-0 overflow-y-scroll lg:block">
       <nav className="space-y-6">
-        {docs.map((section) => (
+        {docsNavigation.map((section) => (
           <div key={section.title} className="space-y-2">
             <button
               onClick={() => toggleSection(section.title)}
