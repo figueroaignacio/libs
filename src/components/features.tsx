@@ -37,7 +37,7 @@ export function Features() {
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                 {feature.icon}
               </div>
-              Type-Safe
+              {feature.title}
             </CardTitle>
           </CardHeader>
           <CardContent compact className="text-left">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 // Styles
+import { Header } from "@/components/header";
 import { geistMono, geistSans } from "../lib/fonts";
 import "./globals.css";
 
@@ -18,7 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.className} ${geistMono.className} antialiased`}>
+        className={`${geistSans.className} ${geistMono.className} antialiased mx-auto  px-5 md:max-w-3xl lg:max-w-[1580px]`}>
+        <Header />
         {children}
       </body>
     </html>

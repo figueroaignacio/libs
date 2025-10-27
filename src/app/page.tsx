@@ -13,13 +13,13 @@ export default function HomePage() {
     {
       label: "Get Started",
       icon: <ArrowRight />,
-      href: "/" as Route,
+      href: "/docs" as Route,
       variant: "secondary" as const,
     },
     {
       label: "View Examples",
       icon: <Code2 />,
-      href: "/asfs" as Route,
+      href: "/hooks/use-mounted" as Route,
       variant: "outline" as const,
     },
   ];

@@ -1,0 +1,47 @@
+[
+  {
+    "slug": "docs",
+    "title": "Introduction",
+    "description": "A collection of React hooks and TypeScript utilities for modern web development",
+    "published": true,
+    "date": "1970-01-01T00:00:00.000Z",
+    "body": "const{Fragment:e,jsx:n,jsxs:l}=arguments[0];function _createMdxContent(c){const i={a:\"a\",code:\"code\",figure:\"figure\",h2:\"h2\",h3:\"h3\",li:\"li\",p:\"p\",pre:\"pre\",span:\"span\",strong:\"strong\",ul:\"ul\",...c.components};return l(e,{children:[l(i.h2,{id:\"react-hooks--typescript-utilities\",children:[n(i.a,{className:\"subheading-anchor\",\"aria-label\":\"Link to section\",href:\"#react-hooks--typescript-utilities\",children:n(i.span,{className:\"icon icon-link\"})}),\"React Hooks & TypeScript Utilities\"]}),\"\\n\",n(i.p,{children:\"Welcome to the documentation for our collection of React hooks and TypeScript utilities. This library provides battle-tested, type-safe utilities to accelerate your React development.\"}),\"\\n\",l(i.h2,{id:\"whats-included\",children:[n(i.a,{className:\"subheading-anchor\",\"aria-label\":\"Link to section\",href:\"#whats-included\",children:n(i.span,{className:\"icon icon-link\"})}),\"What's Included\"]}),\"\\n\",l(i.h3,{id:\"react-hooks\",children:[n(i.a,{className:\"subheading-anchor\",\"aria-label\":\"Link to section\",href:\"#react-hooks\",children:n(i.span,{className:\"icon icon-link\"})}),\"React Hooks\"]}),\"\\n\",n(i.p,{children:\"Custom React hooks that solve common problems in modern web applications:\"}),\"\\n\",l(i.ul,{children:[\"\\n\",l(i.li,{children:[n(i.strong,{children:\"useLocalStorage\"}),\" - Persist state in localStorage with automatic synchronization\"]}),\"\\n\",l(i.li,{children:[n(i.strong,{children:\"useDebounce\"}),\" - Debounce values to optimize performance\"]}),\"\\n\",l(i.li,{children:[n(i.strong,{children:\"useMediaQuery\"}),\" - Respond to CSS media queries in your components\"]}),\"\\n\"]}),\"\\n\",l(i.h3,{id:\"typescript-utilities\",children:[n(i.a,{className:\"subheading-anchor\",\"aria-label\":\"Link to section\",href:\"#typescript-utilities\",children:n(i.span,{className:\"icon icon-link\"})}),\"TypeScript Utilities\"]}),\"\\n\",n(i.p,{children:\"Type-safe utility functions for common tasks:\"}),\"\\n\",l(i.ul,{children:[\"\\n\",l(i.li,{children:[n(i.strong,{children:\"cn\"}),\" - Merge Tailwind CSS classes intelligently\"]}),\"\\n\",l(i.li,{children:[n(i.strong,{children:\"formatDate\"}),\" - Format dates consistently across your application\"]}),\"\\n\"]}),\"\\n\",l(i.h2,{id:\"getting-started\",children:[n(i.a,{className:\"subheading-anchor\",\"aria-label\":\"Link to section\",href:\"#getting-started\",children:n(i.span,{className:\"icon icon-link\"})}),\"Getting Started\"]}),\"\\n\",n(i.p,{children:\"Browse the documentation using the sidebar navigation. Each hook and utility includes:\"}),\"\\n\",l(i.ul,{children:[\"\\n\",n(i.li,{children:\"Detailed usage examples\"}),\"\\n\",n(i.li,{children:\"Full TypeScript definitions\"}),\"\\n\",n(i.li,{children:\"Implementation source code\"}),\"\\n\",n(i.li,{children:\"API reference\"}),\"\\n\"]}),\"\\n\",l(i.h2,{id:\"quick-example\",children:[n(i.a,{className:\"subheading-anchor\",\"aria-label\":\"Link to section\",href:\"#quick-example\",children:n(i.span,{className:\"icon icon-link\"})}),\"Quick Example\"]}),\"\\n\",n(i.figure,{\"data-rehype-pretty-code-figure\":\"\",children:n(i.pre,{style:{backgroundColor:\"#17191e\",color:\"#eef0f9\"},tabIndex:\"0\",\"data-language\":\"tsx\",\"data-theme\":\"houston\",children:l(i.code,{\"data-language\":\"tsx\",\"data-theme\":\"houston\",style:{display:\"grid\"},children:[l(i.span,{\"data-line\":\"\",children:[n(i.span,{style:{color:\"#54B9FF\"},children:\"import\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\" { \"}),n(i.span,{style:{color:\"#4BF3C8\"},children:\"useLocalStorage\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\" } \"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"from\"}),n(i.span,{style:{color:\"#FFD493\"},children:' \"@your-org/react-utils\"'}),n(i.span,{style:{color:\"#EEF0F9\"},children:\";\"})]}),\"\\n\",n(i.span,{\"data-line\":\"\",children:\" \"}),\"\\n\",l(i.span,{\"data-line\":\"\",children:[n(i.span,{style:{color:\"#54B9FF\"},children:\"function\"}),n(i.span,{style:{color:\"#00DAEF\"},children:\" App\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\"() {\"})]}),\"\\n\",l(i.span,{\"data-line\":\"\",children:[n(i.span,{style:{color:\"#54B9FF\"},children:\"  const\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\" [\"}),n(i.span,{style:{color:\"#ACAFFF\"},children:\"name\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\", \"}),n(i.span,{style:{color:\"#ACAFFF\"},children:\"setName\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\"] = \"}),n(i.span,{style:{color:\"#00DAEF\"},children:\"useLocalStorage\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\"(\"}),n(i.span,{style:{color:\"#FFD493\"},children:'\"name\"'}),n(i.span,{style:{color:\"#EEF0F9\"},children:\", \"}),n(i.span,{style:{color:\"#FFD493\"},children:'\"Guest\"'}),n(i.span,{style:{color:\"#EEF0F9\"},children:\");\"})]}),\"\\n\",n(i.span,{\"data-line\":\"\",children:\" \"}),\"\\n\",l(i.span,{\"data-line\":\"\",children:[n(i.span,{style:{color:\"#54B9FF\"},children:\"  return\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\" (\"})]}),\"\\n\",l(i.span,{\"data-line\":\"\",children:[n(i.span,{style:{color:\"#EEF0F9\"},children:\"    <\"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"div\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\">\"})]}),\"\\n\",l(i.span,{\"data-line\":\"\",children:[n(i.span,{style:{color:\"#EEF0F9\"},children:\"      <\"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"input\"}),n(i.span,{style:{color:\"#4BF3C8\",fontStyle:\"italic\"},children:\" value\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\"=\"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"{\"}),n(i.span,{style:{color:\"#4BF3C8\"},children:\"name\"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"}\"}),n(i.span,{style:{color:\"#4BF3C8\",fontStyle:\"italic\"},children:\" onChange\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\"=\"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"{\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\"(\"}),n(i.span,{style:{color:\"#4BF3C8\",fontStyle:\"italic\"},children:\"e\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\") \"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"=>\"}),n(i.span,{style:{color:\"#00DAEF\"},children:\" setName\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\"(\"}),n(i.span,{style:{color:\"#4BF3C8\"},children:\"e\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\".\"}),n(i.span,{style:{color:\"#4BF3C8\"},children:\"target\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\".\"}),n(i.span,{style:{color:\"#4BF3C8\"},children:\"value\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\")\"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"}\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\" />\"})]}),\"\\n\",l(i.span,{\"data-line\":\"\",children:[n(i.span,{style:{color:\"#EEF0F9\"},children:\"      <\"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"p\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\">Hello, \"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"{\"}),n(i.span,{style:{color:\"#4BF3C8\"},children:\"name\"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"}\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\"!</\"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"p\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\">\"})]}),\"\\n\",l(i.span,{\"data-line\":\"\",children:[n(i.span,{style:{color:\"#EEF0F9\"},children:\"    </\"}),n(i.span,{style:{color:\"#54B9FF\"},children:\"div\"}),n(i.span,{style:{color:\"#EEF0F9\"},children:\">\"})]}),\"\\n\",n(i.span,{\"data-line\":\"\",children:n(i.span,{style:{color:\"#EEF0F9\"},children:\"  );\"})}),\"\\n\",n(i.span,{\"data-line\":\"\",children:n(i.span,{style:{color:\"#EEF0F9\"},children:\"}\"})})]})})})]})}return{default:function(e={}){const{wrapper:l}=e.components||{};return l?n(l,{...e,children:n(_createMdxContent,{...e})}):_createMdxContent(e)}};",
+    "toc": {
+      "content": [
+        {
+          "title": "React Hooks & TypeScript Utilities",
+          "url": "#react-hooks--typescript-utilities",
+          "items": []
+        },
+        {
+          "title": "What's Included",
+          "url": "#whats-included",
+          "items": [
+            {
+              "title": "React Hooks",
+              "url": "#react-hooks",
+              "items": []
+            },
+            {
+              "title": "TypeScript Utilities",
+              "url": "#typescript-utilities",
+              "items": []
+            }
+          ]
+        },
+        {
+          "title": "Getting Started",
+          "url": "#getting-started",
+          "items": []
+        },
+        {
+          "title": "Quick Example",
+          "url": "#quick-example",
+          "items": []
+        }
+      ],
+      "visible": true
+    },
+    "slugAsParams": ""
+  }
+]
