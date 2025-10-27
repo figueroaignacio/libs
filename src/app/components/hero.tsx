@@ -1,7 +1,7 @@
 export function Hero() {
   return (
     <div className="space-y-4">
-      <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
+      <h1 className="text-5xl md:text-7xl font-bold tracking-tight font-sans">
         <span className="gradient-text">I7A Libs</span>
       </h1>
       <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
