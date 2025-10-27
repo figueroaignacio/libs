@@ -1,9 +1,9 @@
 // Components
 import { ArrowRight, Code2 } from "lucide-react";
 import Link from "next/link";
-import { Features } from "./components/features";
-import { Hero } from "./components/hero";
-import { Button } from "./components/ui/button";
+import { Features } from "../components/features";
+import { Hero } from "../components/hero";
+import { Button } from "../components/ui/button";
 
 // Types
 import type { Route } from "next";

@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/app/lib/cn";
+import { cn } from "@/lib/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
 import React, { forwardRef, useCallback } from "react";

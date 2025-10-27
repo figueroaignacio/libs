@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 // Styles
+import { geistMono, geistSans } from "../lib/fonts";
 import "./globals.css";
-import { geistMono, geistSans } from "./lib/fonts";
 
 export const metadata: Metadata = {
   title: "I7A Libs",
