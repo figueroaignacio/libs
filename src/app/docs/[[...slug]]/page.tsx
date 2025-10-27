@@ -71,7 +71,7 @@ export default async function DocPage({
 
   return (
     <>
-      <article className="flex flex-col lg:px-36 mt-6">
+      <article className="flex flex-col lg:px-36 mt-6 min-w-0 w-full">
         <div className="lg:hidden">{/* <MobileToc toc={tocContent} /> */}</div>
 
         <div className="border-border mb-5 flex items-start justify-between border-b pb-5">
@@ -81,7 +81,7 @@ export default async function DocPage({
           </div>
           {/* <DocsNavigationButtons currentPath={currentPath} /> */}
         </div>
-        <div className="flex-1 ">
+        <div className="flex-1 min-w-0">
           {doc.body ? <MDXContent code={doc.body} /> : <div>Error</div>}
         </div>
         {/* <div>
