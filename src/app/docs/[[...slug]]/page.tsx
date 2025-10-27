@@ -8,6 +8,7 @@ import { getDocBySlug } from "@/lib/get-docs";
 import { notFound } from "next/navigation";
 
 // Components
+import { DocsPagination } from "@/components/docs-pagination";
 import { MDXContent } from "@/components/mdx/mdx-content";
 import { Toc } from "@/components/toc";
 
@@ -79,17 +80,14 @@ export default async function DocPage({
             <h1 className="text-2xl font-bold">{doc.title}</h1>
             <p className="text-muted-foreground max-w-lg">{doc.description}</p>
           </div>
-          {/* <DocsNavigationButtons currentPath={currentPath} /> */}
         </div>
         <div className="flex-1 min-w-0">
           {doc.body ? <MDXContent code={doc.body} /> : <div>Error</div>}
         </div>
-        {/* <div>
+        <div>
           <DocsPagination currentPath={currentPath} />
-        </div> */}
+        </div>
       </article>
-
-      {/* Desktop TOC (tercera columna) */}
       <div className="hidden lg:block">
         <Toc toc={tocContent} />
       </div>
