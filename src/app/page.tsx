@@ -13,7 +13,7 @@ export default function HomePage() {
     {
       label: "Get Started",
       icon: <ArrowRight />,
-      href: "/docs" as Route,
+      href: "/docs/introduction" as Route,
       variant: "secondary" as const,
     },
     {

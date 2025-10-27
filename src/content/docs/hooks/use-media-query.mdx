@@ -1,0 +1,198 @@
+---
+title: useMediaQuery
+description: Respond to CSS media queries in your React components
+published: true
+toc:
+  visible: true
+date:
+---
+
+A React hook that tracks the state of a CSS media query and returns whether it matches.
+
+## Usage
+
+```tsx
+import { useMediaQuery } from "@/hooks/use-media-query";
+
+function ResponsiveComponent() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isDark = useMediaQuery("(prefers-color-scheme: dark)");
+
+  return (
+    <div>
+      {isMobile ? <MobileNav /> : <DesktopNav />}
+      <p>Theme preference: {isDark ? "Dark" : "Light"}</p>
+    </div>
+  );
+}
+```
+
+## Features
+
+- SSR-safe (returns false on server)
+- Automatically updates when media query changes
+- Supports all CSS media query features
+- Efficient event listener management
+- Browser compatibility fallbacks
+
+## API Reference
+
+### Parameters
+
+- `query` (string) - The CSS media query to match
+
+### Returns
+
+Returns a boolean indicating whether the media query matches.
+
+## Implementation
+
+```tsx
+import { useState, useEffect } from "react";
+
+export function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const media = window.matchMedia(query);
+
+    // Set initial value
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+
+    // Create event listener
+    const listener = (e: MediaQueryListEvent) => {
+      setMatches(e.matches);
+    };
+
+    // Add listener
+    media.addEventListener("change", listener);
+
+    // Cleanup
+    return () => media.removeEventListener("change", listener);
+  }, [query, matches]);
+
+  return matches;
+}
+```
+
+## Examples
+
+### Responsive Layout
+
+```tsx
+function Dashboard() {
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const isTablet = useMediaQuery("(min-width: 768px) and (max-width: 1023px)");
+  const isMobile = useMediaQuery("(max-width: 767px)");
+
+  return (
+    <div>
+      {isDesktop && <DesktopLayout />}
+      {isTablet && <TabletLayout />}
+      {isMobile && <MobileLayout />}
+    </div>
+  );
+}
+```
+
+### Dark Mode Detection
+
+```tsx
+function ThemeProvider({ children }) {
+  const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
+  const [theme, setTheme] = useState(prefersDark ? "dark" : "light");
+
+  useEffect(() => {
+    setTheme(prefersDark ? "dark" : "light");
+  }, [prefersDark]);
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+```
+
+### Print Styles
+
+```tsx
+function Document() {
+  const isPrinting = useMediaQuery("print");
+
+  return (
+    <div>
+      {!isPrinting && <Navigation />}
+      <Content />
+      {!isPrinting && <Footer />}
+    </div>
+  );
+}
+```
+
+### Reduced Motion
+
+```tsx
+function AnimatedComponent() {
+  const prefersReducedMotion = useMediaQuery(
+    "(prefers-reduced-motion: reduce)"
+  );
+
+  return (
+    <motion.div
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: prefersReducedMotion ? 0 : 0.5,
+      }}>
+      Content
+    </motion.div>
+  );
+}
+```
+
+### Custom Breakpoints Hook
+
+```tsx
+function useBreakpoint() {
+  const isSm = useMediaQuery("(min-width: 640px)");
+  const isMd = useMediaQuery("(min-width: 768px)");
+  const isLg = useMediaQuery("(min-width: 1024px)");
+  const isXl = useMediaQuery("(min-width: 1280px)");
+  const is2xl = useMediaQuery("(min-width: 1536px)");
+
+  return { isSm, isMd, isLg, isXl, is2xl };
+}
+
+// Usage
+function MyComponent() {
+  const { isMd, isLg } = useBreakpoint();
+
+  return (
+    <div className={`grid ${isMd ? "grid-cols-2" : "grid-cols-1"}`}>
+      {/* Content */}
+    </div>
+  );
+}
+```
+
+### Orientation Detection
+
+```tsx
+function VideoPlayer() {
+  const isLandscape = useMediaQuery("(orientation: landscape)");
+
+  return (
+    <div className={isLandscape ? "aspect-video" : "aspect-square"}>
+      <video controls>
+        <source src="video.mp4" type="video/mp4" />
+      </video>
+    </div>
+  );
+}
+```

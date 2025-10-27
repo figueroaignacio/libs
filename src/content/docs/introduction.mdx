@@ -1,0 +1,135 @@
+---
+title: Introduction
+description: A collection of React hooks and TypeScript utilities for modern web development
+published: true
+toc:
+  visible: true
+date:
+---
+
+## React Hooks & TypeScript Utilities
+
+A curated collection of production-ready React hooks and TypeScript utilities. Copy, paste, and customize - no dependencies, no installation required.
+
+## Philosophy
+
+This is not a library. It's a collection of code you can copy and adapt to your needs.
+Why copy-paste over npm install?
+
+- 🎯 Full Control - The code lives in your project, modify it as needed
+- 🚀 Zero Dependencies - No package maintenance or version conflicts
+- 📦 No Bundle Bloat - Only copy what you actually use
+- 🔧 Learn by Reading - Understand every line of code you use
+- ⚡ No Breaking Changes - Your code, your rules
+
+## How It Works
+
+- Browse the documentation to find the hook or utility you need
+- Copy the implementation code directly from the docs
+- Paste it into your project (e.g., src/hooks/ or src/lib/)
+- Customize to fit your specific requirements
+- Done - you own the code now
+
+## Quick Example
+
+```tsx
+// 1. Copy the hook from the docs
+import { useLocalStorage } from "@/hooks/use-local-storage";
+import { useDebounce } from "@/hooks/use-debounce";
+
+// 2. Use it in your component
+function SearchWithHistory() {
+  const [searches, setSearches] = useLocalStorage<string[]>(
+    "search-history",
+    []
+  );
+  const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 500);
+
+  useEffect(() => {
+    if (debouncedQuery && !searches.includes(debouncedQuery)) {
+      setSearches([debouncedQuery, ...searches].slice(0, 10));
+    }
+  }, [debouncedQuery]);
+
+  return (
+    <div>
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search..."
+      />
+      <div>
+        <h3>Recent searches:</h3>
+        {searches.map((search) => (
+          <button key={search} onClick={() => setQuery(search)}>
+            {search}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// 3. Modify the code if needed - it's yours now!
+```
+
+## Recommended Setup
+
+```
+src/
+├── hooks/          # Copy React hooks here
+│   ├── use-local-storage.ts
+│   ├── use-debounce.ts
+│   └── ...
+├── lib/            # Copy utilities here
+│   ├── cn.ts       # cn() and other utils
+│   └── format-date.tss
+└── ...
+```
+
+## Each Page Includes
+
+Every hook and utility documentation contains:
+
+- ✅ Full TypeScript implementation (ready to copy)
+- ✅ Real-world usage examples
+- ✅ API reference with parameters and return types
+- ✅ Common patterns and edge cases
+- ✅ Integration tips
+
+## TypeScript Support
+
+All code is written in TypeScript with:
+
+- Full type safety
+- Generic types where appropriate
+- JSDoc comments for better IDE hints
+- Strict mode compatible
+
+If you're using JavaScript, just remove the type annotations.
+
+## Dependencies Note
+
+Most utilities are dependency-free. A few require common packages:
+
+`cn()` utility needs clsx and tailwind-merge
+Date utilities work best with date-fns (but vanilla JS works too)
+
+Dependencies are clearly noted in each documentation page.
+
+## Credits & Inspiration
+
+This collection is inspired by:
+
+- `shadcn/ui` - The copy-paste component philosophy
+- `usehooks.com` - React hooks patterns
+- `react-use` - Hook implementations
+
+## Have a useful hook or utility to share?
+
+1. Fork the repository
+2. Add your implementation with full documentation
+3. Submit a pull request
+
+Keep it simple, well-documented, and production-ready.

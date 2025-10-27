@@ -1,0 +1,211 @@
+---
+title: cn
+description: Merge and dedupe Tailwind CSS classes intelligently
+published: true
+toc:
+  visible: true
+date:
+---
+
+A utility function to merge Tailwind CSS classes intelligently, handling conflicts and deduplication.
+
+## Usage
+
+```tsx
+import { cn } from "@/lib/utils";
+
+function Button({ className, variant = "default" }) {
+  return (
+    <button
+      className={cn(
+        "px-4 py-2 rounded-md font-medium transition-colors",
+        variant === "default" && "bg-blue-500 text-white hover:bg-blue-600",
+        variant === "outline" && "border border-gray-300 hover:bg-gray-100",
+        className
+      )}>
+      Click me
+    </button>
+  );
+}
+```
+
+## Features
+
+- Merges multiple class strings
+- Handles conditional classes
+- Resolves Tailwind CSS conflicts (last class wins)
+- Removes duplicate classes
+- Type-safe with TypeScript
+
+## Installation
+
+This utility requires two dependencies:
+
+```bash
+pnpm install clsx tailwind-merge
+```
+
+## API Reference
+
+### Parameters
+
+- `...inputs` (ClassValue[]) - Any number of class values (strings, objects, arrays)
+
+### Returns
+
+Returns a merged string of deduplicated Tailwind classes.
+
+## Implementation
+
+```tsx
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+## Examples
+
+### Basic Merging
+
+```tsx
+cn("px-4 py-2", "bg-blue-500");
+// => 'px-4 py-2 bg-blue-500'
+```
+
+### Handling Conflicts
+
+```tsx
+// Last class wins for conflicting utilities
+cn("bg-red-500", "bg-blue-500");
+// => 'bg-blue-500'
+
+cn("p-4", "px-8");
+// => 'py-4 px-8'
+```
+
+### Conditional Classes
+
+```tsx
+cn("base-class", condition && "conditional-class");
+// => 'base-class conditional-class' (if condition is true)
+// => 'base-class' (if condition is false)
+
+cn("text-sm", {
+  "font-bold": isBold,
+  "text-red-500": hasError,
+});
+```
+
+### Component Variants
+
+```tsx
+function Alert({ variant, className, children }) {
+  return (
+    <div
+      className={cn(
+        "p-4 rounded-lg border",
+        {
+          "bg-blue-50 border-blue-200 text-blue-900": variant === "info",
+          "bg-green-50 border-green-200 text-green-900": variant === "success",
+          "bg-yellow-50 border-yellow-200 text-yellow-900":
+            variant === "warning",
+          "bg-red-50 border-red-200 text-red-900": variant === "error",
+        },
+        className
+      )}>
+      {children}
+    </div>
+  );
+}
+```
+
+### Size Variants
+
+```tsx
+function Badge({ size = "md", className, children }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-full font-medium",
+        {
+          "px-2 py-0.5 text-xs": size === "sm",
+          "px-3 py-1 text-sm": size === "md",
+          "px-4 py-1.5 text-base": size === "lg",
+        },
+        className
+      )}>
+      {children}
+    </span>
+  );
+}
+```
+
+### Complex Component
+
+```tsx
+function Card({
+  variant = "default",
+  padding = "md",
+  shadow = true,
+  className,
+  children,
+}) {
+  return (
+    <div
+      className={cn(
+        "rounded-lg border border-gray-200",
+        // Variants
+        {
+          "bg-white": variant === "default",
+          "bg-gray-50": variant === "muted",
+          "bg-gradient-to-br from-blue-50 to-indigo-50": variant === "gradient",
+        },
+        // Padding
+        {
+          "p-3": padding === "sm",
+          "p-6": padding === "md",
+          "p-8": padding === "lg",
+        },
+        // Shadow
+        shadow && "shadow-md hover:shadow-lg transition-shadow",
+        className
+      )}>
+      {children}
+    </div>
+  );
+}
+```
+
+### With Arrays
+
+```tsx
+const baseStyles = ["flex", "items-center", "gap-2"];
+const variantStyles = isActive
+  ? ["bg-blue-500", "text-white"]
+  : ["bg-gray-100"];
+
+cn(baseStyles, variantStyles, "hover:opacity-80");
+```
+
+### Responsive Classes
+
+```tsx
+function ResponsiveGrid({ className }) {
+  return (
+    <div
+      className={cn(
+        "grid gap-4",
+        "grid-cols-1",
+        "md:grid-cols-2",
+        "lg:grid-cols-3",
+        "xl:grid-cols-4",
+        className
+      )}>
+      {/* Content */}
+    </div>
+  );
+}
+```

@@ -37,14 +37,35 @@ export function Toc({ toc }: TocProps) {
     return null;
   }
 
-  return mounted ? (
+  if (!mounted) {
+    return (
+      <div className="sticky top-24 h-[calc(100vh-5rem)] space-y-3">
+        <p className="text-xs font-semibold tracking-wider">on this page</p>
+        <div className="h-3 w-24 animate-pulse rounded bg-secondary" />
+        <div className="border-border/40 border-l pl-4 space-y-3">
+          <div className="h-3 w-32 animate-pulse rounded bg-secondary" />
+          <div className="pl-3 space-y-2.5">
+            <div className="h-3 w-28 animate-pulse rounded bg-secondary" />
+            <div className="h-3 w-24 animate-pulse rounded bg-secondary" />
+          </div>
+          <div className="h-3 w-36 animate-pulse rounded bg-secondary" />
+          <div className="pl-3 space-y-2.5">
+            <div className="h-3 w-28 animate-pulse rounded bg-secondary" />
+          </div>
+          <div className="h-3 w-28 animate-pulse rounded bg-secondary" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
     <div className="hide-scrollbar sticky top-24 h-[calc(100vh-5rem)] space-y-3">
       <p className="text-xs font-semibold tracking-wider">on this page</p>
       <div className="border-border/40 border-l pl-4">
         <Tree tree={toc} activeItem={activeHeading} />
       </div>
     </div>
-  ) : null;
+  );
 }
 
 function useActiveItem(itemIds: (string | undefined)[]) {

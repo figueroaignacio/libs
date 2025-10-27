@@ -1,0 +1,171 @@
+---
+title: useLocalStorage
+description: Persist state in localStorage with automatic synchronization
+published: true
+toc:
+  visible: true
+date:
+---
+
+A React hook that syncs state with localStorage and supports cross-tab synchronization.
+
+## Usage
+
+```tsx
+import { useLocalStorage } from "@your-org/react-utils";
+
+function UserPreferences() {
+  const [theme, setTheme, removeTheme] = useLocalStorage("theme", "light");
+
+  return (
+    <div>
+      <p>Current theme: {theme}</p>
+      <button onClick={() => setTheme("dark")}>Dark Mode</button>
+      <button onClick={() => setTheme("light")}>Light Mode</button>
+      <button onClick={removeTheme}>Reset</button>
+    </div>
+  );
+}
+```
+
+## Features
+
+- SSR-safe (returns initial value on server)
+- Cross-tab synchronization
+- Type-safe with TypeScript generics
+- Automatic JSON serialization/deserialization
+- Error handling with fallbacks
+- Optional remove function
+
+## API Reference
+
+### Parameters
+
+- `key` (string) - The localStorage key
+- `initialValue` (T) - Default value if key doesn't exist
+
+### Returns
+
+Returns a tuple with:
+
+- `storedValue` (T) - Current value from localStorage
+- `setValue` (function) - Update the value (supports updater function)
+- `removeValue` (function) - Remove the key from localStorage
+
+## Examples
+
+### Store User Settings
+
+```tsx
+interface UserSettings {
+  notifications: boolean;
+  language: string;
+  fontSize: number;
+}
+
+function SettingsPanel() {
+  const [settings, setSettings] = useLocalStorage<UserSettings>(
+    "user-settings",
+    {
+      notifications: true,
+      language: "en",
+      fontSize: 16,
+    }
+  );
+
+  const updateFontSize = (size: number) => {
+    setSettings((prev) => ({ ...prev, fontSize: size }));
+  };
+
+  return (
+    <div>
+      <label>
+        <input
+          type="checkbox"
+          checked={settings.notifications}
+          onChange={(e) =>
+            setSettings((prev) => ({
+              ...prev,
+              notifications: e.target.checked,
+            }))
+          }
+        />
+        Enable notifications
+      </label>
+
+      <select
+        value={settings.fontSize}
+        onChange={(e) => updateFontSize(Number(e.target.value))}>
+        <option value={14}>Small</option>
+        <option value={16}>Medium</option>
+        <option value={18}>Large</option>
+      </select>
+    </div>
+  );
+}
+```
+
+### Shopping Cart
+
+```tsx
+function ShoppingCart() {
+  const [cart, setCart, clearCart] = useLocalStorage<CartItem[]>("cart", []);
+
+  const addToCart = (item: CartItem) => {
+    setCart((prev) => [...prev, item]);
+  };
+
+  const removeFromCart = (id: string) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  return (
+    <div>
+      <h2>Cart ({cart.length} items)</h2>
+      {cart.map((item) => (
+        <CartItem key={item.id} item={item} onRemove={removeFromCart} />
+      ))}
+      <button onClick={clearCart}>Clear Cart</button>
+    </div>
+  );
+}
+```
+
+### Form Draft
+
+```tsx
+function BlogPostEditor() {
+  const [draft, setDraft, removeDraft] = useLocalStorage("blog-draft", {
+    title: "",
+    content: "",
+    tags: [],
+  });
+
+  const handlePublish = async () => {
+    await publishPost(draft);
+    removeDraft(); // Clear draft after publishing
+  };
+
+  return (
+    <form>
+      <input
+        value={draft.title}
+        onChange={(e) =>
+          setDraft((prev) => ({ ...prev, title: e.target.value }))
+        }
+        placeholder="Title"
+      />
+      <textarea
+        value={draft.content}
+        onChange={(e) =>
+          setDraft((prev) => ({ ...prev, content: e.target.value }))
+        }
+        placeholder="Content"
+      />
+      <button type="button" onClick={handlePublish}>
+        Publish
+      </button>
+    </form>
+  );
+}
+```

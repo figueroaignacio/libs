@@ -1,0 +1,155 @@
+---
+title: useDebounce
+description: Delay value updates until after a pause in changes
+published: true
+toc:
+  visible: true
+date:
+---
+
+A React hook that debounces a value, useful for search inputs and expensive operations.
+
+## Usage
+
+```tsx
+import { useDebounce } from "@your-org/react-utils";
+
+function SearchComponent() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearch = useDebounce(searchTerm, 500);
+
+  useEffect(() => {
+    if (debouncedSearch) {
+      // API call with debounced value
+      fetchResults(debouncedSearch);
+    }
+  }, [debouncedSearch]);
+
+  return (
+    <input
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      placeholder="Search..."
+    />
+  );
+}
+```
+
+## Features
+
+- Reduces API calls and expensive computations
+- Configurable delay
+- Automatic cleanup on unmount
+- Type-safe with TypeScript generics
+
+## API Reference
+
+### Parameters
+
+- `value` (T) - The value to debounce
+- `delay` (number) - Delay in milliseconds (default: 500)
+
+### Returns
+
+Returns the debounced value of type T.
+
+## Examples
+
+### Search with API Calls
+
+```tsx
+function UserSearch() {
+  const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 300);
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!debouncedQuery) {
+      setResults([]);
+      return;
+    }
+
+    setLoading(true);
+    searchUsers(debouncedQuery)
+      .then(setResults)
+      .finally(() => setLoading(false));
+  }, [debouncedQuery]);
+
+  return (
+    <div>
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search users..."
+      />
+      {loading && <Spinner />}
+      <UserList users={results} />
+    </div>
+  );
+}
+```
+
+### Auto-save Form
+
+```tsx
+function AutoSaveForm() {
+  const [formData, setFormData] = useState({ title: "", content: "" });
+  const debouncedFormData = useDebounce(formData, 1000);
+
+  useEffect(() => {
+    // Auto-save after user stops typing for 1 second
+    if (debouncedFormData.title || debouncedFormData.content) {
+      saveDraft(debouncedFormData);
+    }
+  }, [debouncedFormData]);
+
+  return (
+    <form>
+      <input
+        value={formData.title}
+        onChange={(e) =>
+          setFormData((prev) => ({ ...prev, title: e.target.value }))
+        }
+      />
+      <textarea
+        value={formData.content}
+        onChange={(e) =>
+          setFormData((prev) => ({ ...prev, content: e.target.value }))
+        }
+      />
+      <p className="text-sm text-gray-500">Draft saved automatically</p>
+    </form>
+  );
+}
+```
+
+### Window Resize Handler
+
+```tsx
+function ResponsiveChart() {
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const debouncedDimensions = useDebounce(dimensions, 200);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return (
+    <Chart
+      width={debouncedDimensions.width}
+      height={debouncedDimensions.height}
+    />
+  );
+}
+```

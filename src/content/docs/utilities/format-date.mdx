@@ -1,0 +1,299 @@
+---
+title: formatDate
+description: Format dates consistently across your application
+published: true
+toc:
+  visible: true
+date:
+---
+
+A utility function to format dates consistently using date-fns with built-in formatters for common use cases.
+
+## Usage
+
+```tsx
+import { formatDate } from "@/lib/utils";
+
+function BlogPost({ publishedAt }) {
+  return (
+    <article>
+      <time dateTime={publishedAt}>{formatDate(publishedAt, "long")}</time>
+    </article>
+  );
+}
+```
+
+## Features
+
+- Multiple built-in formatters
+- Consistent formatting across your app
+- TypeScript support with autocomplete
+- Locale support via date-fns
+- Custom format strings
+
+## Installation
+
+This utility requires date-fns:
+
+```bash
+npm install date-fns
+```
+
+## API Reference
+
+### Parameters
+
+- `date` (Date | string | number) - The date to format
+- `formatType` (string) - Format type or custom format string (default: 'medium')
+- `locale` ('en' | 'es') - Locale for formatting (default: 'en')
+
+### Returns
+
+Returns a formatted date string.
+
+## Built-in Formatters
+
+| Format     | Output                     | Use Case         |
+| ---------- | -------------------------- | ---------------- |
+| `short`    | 1/20/24                    | Compact displays |
+| `medium`   | Jan 20, 2024               | Default format   |
+| `long`     | January 20, 2024           | Readable dates   |
+| `full`     | Saturday, January 20, 2024 | Formal dates     |
+| `time`     | 2:30 PM                    | Time only        |
+| `datetime` | Jan 20, 2024 2:30 PM       | Date with time   |
+| `relative` | 2 hours ago                | Social features  |
+| `iso`      | 2024-01-20T14:30:00.000Z   | APIs/Database    |
+
+## Implementation
+
+```tsx
+import { format, formatDistanceToNow, isValid, parseISO } from "date-fns";
+import { es, enUS } from "date-fns/locale";
+
+type DateInput = Date | string | number;
+
+type DateFormat =
+  | "short" // 1/20/24
+  | "medium" // Jan 20, 2024
+  | "long" // January 20, 2024
+  | "full" // Saturday, January 20, 2024
+  | "time" // 2:30 PM
+  | "datetime" // Jan 20, 2024 2:30 PM
+  | "relative" // 2 hours ago
+  | "iso"; // 2024-01-20T14:30:00.000Z
+
+const formatters: Record<DateFormat, string> = {
+  short: "M/d/yy",
+  medium: "MMM d, yyyy",
+  long: "MMMM d, yyyy",
+  full: "EEEE, MMMM d, yyyy",
+  time: "h:mm a",
+  datetime: "MMM d, yyyy h:mm a",
+  iso: "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+  relative: "", // Handled separately
+};
+
+export function formatDate(
+  date: DateInput,
+  formatType: DateFormat | string = "medium",
+  locale: "en" | "es" = "en"
+): string {
+  // Parse date
+  let dateObj: Date;
+
+  if (typeof date === "string") {
+    dateObj = parseISO(date);
+  } else if (typeof date === "number") {
+    dateObj = new Date(date);
+  } else {
+    dateObj = date;
+  }
+
+  // Validate
+  if (!isValid(dateObj)) {
+    console.warn("Invalid date provided to formatDate");
+    return "Invalid date";
+  }
+
+  // Handle relative formatting
+  if (formatType === "relative") {
+    return formatDistanceToNow(dateObj, {
+      addSuffix: true,
+      locale: locale === "es" ? es : enUS,
+    });
+  }
+
+  // Get format string
+  const formatString = formatters[formatType as DateFormat] || formatType;
+
+  // Format date
+  return format(dateObj, formatString, {
+    locale: locale === "es" ? es : enUS,
+  });
+}
+```
+
+## Examples
+
+### Basic Usage
+
+```tsx
+const date = new Date("2024-01-20T14:30:00");
+
+formatDate(date, "short");
+// => '1/20/24'
+
+formatDate(date, "medium");
+// => 'Jan 20, 2024'
+
+formatDate(date, "long");
+// => 'January 20, 2024'
+
+formatDate(date, "full");
+// => 'Saturday, January 20, 2024'
+
+formatDate(date, "time");
+// => '2:30 PM'
+
+formatDate(date, "datetime");
+// => 'Jan 20, 2024 2:30 PM'
+```
+
+### Relative Time
+
+```tsx
+const recentDate = new Date(Date.now() - 2 * 60 * 60 * 1000); // 2 hours ago
+
+formatDate(recentDate, "relative");
+// => '2 hours ago'
+
+const futureDate = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000); // 3 days from now
+
+formatDate(futureDate, "relative");
+// => 'in 3 days'
+```
+
+### Custom Format Strings
+
+```tsx
+const date = new Date("2024-01-20T14:30:00");
+
+formatDate(date, "yyyy-MM-dd");
+// => '2024-01-20'
+
+formatDate(date, "MMM do, yyyy");
+// => 'Jan 20th, 2024'
+
+formatDate(date, "EEEE, MMMM do");
+// => 'Saturday, January 20th'
+
+formatDate(date, "h:mm a 'on' MMM d");
+// => '2:30 PM on Jan 20'
+```
+
+### Locale Support
+
+```tsx
+const date = new Date("2024-01-20");
+
+formatDate(date, "long", "en");
+// => 'January 20, 2024'
+
+formatDate(date, "long", "es");
+// => '20 de enero de 2024'
+
+formatDate(date, "full", "es");
+// => 'sábado, 20 de enero de 2024'
+```
+
+### Blog Post Dates
+
+```tsx
+function BlogPostMeta({ publishedAt, updatedAt }) {
+  return (
+    <div className="text-sm text-gray-600">
+      <p>Published {formatDate(publishedAt, "long")}</p>
+      {updatedAt && <p>Updated {formatDate(updatedAt, "relative")}</p>}
+    </div>
+  );
+}
+```
+
+### Comment Timestamps
+
+```tsx
+function Comment({ content, createdAt }) {
+  const isRecent =
+    Date.now() - new Date(createdAt).getTime() < 24 * 60 * 60 * 1000;
+
+  return (
+    <div>
+      <p>{content}</p>
+      <time className="text-xs text-gray-500">
+        {isRecent
+          ? formatDate(createdAt, "relative")
+          : formatDate(createdAt, "medium")}
+      </time>
+    </div>
+  );
+}
+```
+
+### Event Schedule
+
+```tsx
+function EventCard({ event }) {
+  return (
+    <div className="p-4 border rounded-lg">
+      <h3>{event.title}</h3>
+      <div className="flex gap-4 text-sm text-gray-600">
+        <span>{formatDate(event.startDate, "full")}</span>
+        <span>{formatDate(event.startDate, "time")}</span>
+      </div>
+    </div>
+  );
+}
+```
+
+### Date Range
+
+```tsx
+function DateRange({ startDate, endDate }) {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const sameMonth = start.getMonth() === end.getMonth();
+  const sameYear = start.getFullYear() === end.getFullYear();
+
+  if (sameMonth && sameYear) {
+    return (
+      <span>
+        {formatDate(start, "MMM d")} - {formatDate(end, "d, yyyy")}
+      </span>
+    );
+  }
+
+  return (
+    <span>
+      {formatDate(start, "medium")} - {formatDate(end, "medium")}
+    </span>
+  );
+}
+```
+
+### Activity Feed
+
+```tsx
+function ActivityItem({ activity }) {
+  return (
+    <div className="flex items-start gap-3">
+      <Avatar user={activity.user} />
+      <div>
+        <p>{activity.action}</p>
+        <time className="text-xs text-gray-500">
+          {formatDate(activity.timestamp, "relative")}
+        </time>
+      </div>
+    </div>
+  );
+}
+```

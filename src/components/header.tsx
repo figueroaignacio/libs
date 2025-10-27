@@ -7,6 +7,7 @@ import Link from "next/link";
 
 // Types
 import type { Route } from "next";
+import { ThemeToggle } from "./theme-toggle";
 
 interface Navigation {
   label: string;
@@ -30,7 +31,7 @@ const navigation: Navigation[] = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="flex h-16 items-center justify-between">
         <Link href="/" className="items-center gap-2 hidden md:flex">
           <span className="font-bold text-lg">I7A Libs</span>
@@ -46,9 +47,7 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          {/* <Button variant="ghost" size="icon" onClick={toggleTheme}>
-            {theme === "light" ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-          </Button> */}
+          <ThemeToggle />
           <Button variant="ghost" size="icon">
             <a
               href="https://github.com"
