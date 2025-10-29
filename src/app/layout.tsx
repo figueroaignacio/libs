@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 // Components
 import { Header } from "@/components/header";
 import { Providers } from "@/components/providers";
+import { ViewTransition } from "react";
 
 // Styles
 import { fontSans } from "../lib/fonts";
@@ -28,13 +29,15 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning className={theme}>
-      <Providers>
-        <body
-          className={`${fontSans.className} antialiased mx-auto px-5 md:max-w-3xl lg:max-w-[1580px]`}>
-          <Header />
-          {children}
-        </body>
-      </Providers>
+      <ViewTransition>
+        <Providers>
+          <body
+            className={`${fontSans.className} antialiased mx-auto px-5 md:max-w-3xl lg:max-w-[1580px]`}>
+            <Header />
+            {children}
+          </body>
+        </Providers>
+      </ViewTransition>
     </html>
   );
 }
