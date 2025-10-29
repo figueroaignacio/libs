@@ -8,7 +8,7 @@ interface Navigation {
 interface DocsNavItem {
   title: string;
   description: string;
-  href: string;
+  href: Route;
 }
 
 interface DocsNavigation {
@@ -39,7 +39,7 @@ export const docsNavigation: DocsNavigation[] = [
         title: "Introduction",
         description:
           "A collection of React hooks and TypeScript utilities for modern web development",
-        href: "/docs/introduction",
+        href: "/docs/introduction" as Route,
       },
     ],
   },
@@ -50,18 +50,18 @@ export const docsNavigation: DocsNavigation[] = [
         title: "useLocalStorage",
         description:
           "Persist state in localStorage with automatic synchronization across tabs",
-        href: "/docs/hooks/use-local-storage",
+        href: "/docs/hooks/use-local-storage" as Route,
       },
       {
         title: "useDebounce",
         description:
           "Debounce values to optimize performance and reduce unnecessary updates",
-        href: "/docs/hooks/use-debounce",
+        href: "/docs/hooks/use-debounce" as Route,
       },
       {
         title: "useMediaQuery",
         description: "Respond to CSS media queries in your React components",
-        href: "/docs/hooks/use-media-query",
+        href: "/docs/hooks/use-media-query" as Route,
       },
     ],
   },
@@ -72,12 +72,12 @@ export const docsNavigation: DocsNavigation[] = [
         title: "cn",
         description:
           "Intelligently merge Tailwind CSS classes with conflict resolution",
-        href: "/docs/utilities/cn",
+        href: "/docs/utilities/cn" as Route,
       },
       {
         title: "formatDate",
         description: "Format dates consistently across your application",
-        href: "/docs/utilities/format-date",
+        href: "/docs/utilities/format-date" as Route,
       },
     ],
   },

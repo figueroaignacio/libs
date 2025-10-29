@@ -30,7 +30,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning className={theme}>
       <Providers>
         <body
-          className={`${geistSans.className} antialiased mx-auto  px-5 md:max-w-3xl lg:max-w-[1580px]`}>
+          className={`${geistSans.className} antialiased mx-auto px-5 md:max-w-3xl lg:max-w-[1580px]`}>
           <Header />
           {children}
         </body>

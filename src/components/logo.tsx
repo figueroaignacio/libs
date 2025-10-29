@@ -4,7 +4,7 @@ export function Logo() {
   return (
     <Link
       href="/"
-      className="border-border flex w-fit items-center rounded-md border px-3 py-1 pr-6">
+      className="border-border hidden sm:flex w-fit items-center rounded-md border px-3 py-1 pr-6 ">
       <svg
         version="1.1"
         id="Layer_1"
