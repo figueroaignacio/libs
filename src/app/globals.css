@@ -145,7 +145,8 @@
     scrollbar-color: var(--border) transparent;
     @apply border-border scroll-smooth;
   }
-  + body {
+
+  body {
     @apply bg-background text-foreground tracking-wide;
   }
 }
