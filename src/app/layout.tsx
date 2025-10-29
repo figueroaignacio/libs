@@ -5,7 +5,7 @@ import { Header } from "@/components/header";
 import { Providers } from "@/components/providers";
 
 // Styles
-import { geistSans } from "../lib/fonts";
+import { fontSans } from "../lib/fonts";
 import "./globals.css";
 
 // Types
@@ -30,7 +30,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning className={theme}>
       <Providers>
         <body
-          className={`${geistSans.className} antialiased mx-auto px-5 md:max-w-3xl lg:max-w-[1580px]`}>
+          className={`${fontSans.className} antialiased mx-auto px-5 md:max-w-3xl lg:max-w-[1580px]`}>
           <Header />
           {children}
         </body>
