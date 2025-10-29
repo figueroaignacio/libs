@@ -127,10 +127,25 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50 scroll-smooth;
+  body::-webkit-scrollbar {
+    width: 5px;
   }
-  body {
+
+  body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 5px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+    @apply border-border scroll-smooth;
+  }
+  + body {
     @apply bg-background text-foreground tracking-wide;
   }
 }
