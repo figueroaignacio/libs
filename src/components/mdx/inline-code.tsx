@@ -50,7 +50,7 @@ export function InlineCode({
           style={{ ...style, backgroundColor: "transparent" }}
           {...props}>
           {tokens[0].map((token, i) => {
-            const tokenProps = getTokenProps({ token, key: i });
+            const tokenProps = getTokenProps({ token });
             return <span key={i} {...tokenProps} />;
           })}
         </code>
