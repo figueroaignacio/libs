@@ -76,17 +76,20 @@ function SearchWithHistory() {
 
 ## Recommended Setup
 
-```
-src/
-├── hooks/          # Copy React hooks here
-│   ├── use-local-storage.ts
-│   ├── use-debounce.ts
-│   └── ...
-├── lib/            # Copy utilities here
-│   ├── cn.ts       # cn() and other utils
-│   └── format-date.tss
-└── ...
-```
+<div className="mt-4">
+  <Files defaultValue="src">
+    <Folder name="src">
+      <Folder name="hooks">
+        <File name="use-local.storage.ts" />
+        <File name="use-debounce.ts" />
+      </Folder>
+      <Folder name="lib">
+        <File name="cn.ts" />
+        <File name="format-date.ts" />
+      </Folder>
+    </Folder>
+  </Files>
+</div>
 
 ## Each Page Includes
 

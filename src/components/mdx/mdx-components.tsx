@@ -1,5 +1,6 @@
 // Components
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { File, Files, Folder } from "../ui/files";
 import { H1, H2, H3, H4, H5, H6 } from "./heading";
 import { InlineCode } from "./inline-code";
 import { Table, TableCell, TableHeader, TableRow } from "./table";
@@ -36,4 +37,7 @@ export const mdxComponents = {
   TabsContent,
   TabsTrigger,
   TabsList,
+  Files,
+  File,
+  Folder,
 };
